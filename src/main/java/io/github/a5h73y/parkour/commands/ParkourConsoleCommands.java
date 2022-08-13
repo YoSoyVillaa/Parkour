@@ -37,8 +37,11 @@ public class ParkourConsoleCommands extends AbstractPluginReceiver implements Co
                              @NotNull String label,
                              @NotNull String... args) {
         if (commandSender instanceof Player) {
-            TranslationUtils.sendMessage(commandSender, "Use '/parkour' for player commands.");
-            return false;
+            Player player = (Player) commandSender;
+            if (!player.hasPermission("parkour.admin")){
+                TranslationUtils.sendMessage(commandSender, "Permisos insuficientes");
+                return false;
+            }
         }
 
         if (args.length == 0) {
